@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block bodyblock %}
+
+<style>
+    body, html {
+    height: 100%; /* Full height */
+    margin: 0; /* Remove default margin */
+}
+
+#backgroundVideo {
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Cover the entire background */
+    z-index: -1; /* Send the video behind other elements */
+}
+
+
+.container {
+    position: relative; /* Ensure the content is positioned relative to the overlay */
+    z-index: 2; /* Bring the content above the overlay */
+    color: white; /* Text color for contrast */
+}
+
+</style>
+
+<video autoplay muted loop id="backgroundVideo">
+    <source src="{{ url_for('static', filename='videos/01.mp4') }}" type="video/mp4">
+
+</video>
+
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col text-dark">
+            <br><br>
+
+            <h3 class="display-8">Diabetes Classification</h3>
+            <p>Fill out the form, Our model will predict diabetes</p>
+
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="Pregnancies" class="form-label">Pregnancies</label>
+                    <input type="number" class="form-control" id="Pregnancies" name="Pregnancies" placeholder="Number of times pregnant" required>
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="Glucose" class="form-label">Glucose</label>
+                    <input type="number" class="form-control" id="Glucose" name="Glucose" placeholder="Plasma glucose concentration" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="BloodPressure" class="form-label">BloodPressure</label>
+                    <input type="number" class="form-control" id="BloodPressure" name="BloodPressure" placeholder="Diastolic blood pressure(mm Hg)" required>
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="SkinThickness" class="form-label">SkinThickness</label>
+                    <input type="number" class="form-control" id="SkinThickness" name="SkinThickness" placeholder="Triceps skin fold thickness (mm)" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Insulin" class="form-label">Insulin</label>
+                    <input type="number" class="form-control" id="Insulin" name="Insulin" placeholder="2-Hour serum insulin (mu U/ml)" required>
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="BMI" class="form-label">BMI</label>
+                    <input type="text" class="form-control" id="BMI" name="BMI" placeholder="Body mass index (weight in kg/(height in m)^2)" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="DiabetesPedigreeFunction" class="form-label">DiabetesPedigreeFunction</label>
+                    <input type="text" class="form-control" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction" placeholder="Diabetes pedigree function" required>
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="Age" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="Age" name="Age" placeholder="Age (Years)" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Predict</button>
+
+            </form>
+        </div>
+        
+        <div class="col-8 ">
+            <br><br>
+            {% if result %}
+            <h3 class="display-8 text-center">Predicted Result</h3>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Symptoms</th>
+                        <th>Values</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in data.items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+                <tfoot>
+                    <tr>
+                        <td class="text-center">{{ result }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            {% endif %}
+        </div>
+        
+    </div>
+
+</div>
+
+{% endblock bodyblock %}

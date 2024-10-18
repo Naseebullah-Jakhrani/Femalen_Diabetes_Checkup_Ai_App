@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block bodyblock %}
+
+<style>
+    body, html {
+    height: 100%; /* Full height */
+    margin: 0; /* Remove default margin */
+}
+
+#backgroundVideo {
+    position: fixed; /* Fixed positioning */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Cover the entire background */
+    z-index: -1; /* Send the video behind other elements */
+}
+
+
+.container {
+    position: relative; /* Ensure the content is positioned relative to the overlay */
+    z-index: 2; /* Bring the content above the overlay */
+    color: white; /* Text color for contrast */
+}
+.list-group-item {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+</style>
+
+<video autoplay muted loop id="backgroundVideo">
+    <source src="{{ url_for('static', filename='videos/01.mp4') }}" type="video/mp4">
+
+</video>
+
+<div class="container text-center">
+    <br><br>
+
+    <h3 class="display-8 text-primary fw-bold">Female Diabetes Checkup Application</h3>
+
+    <p class="text-dark">
+        This app is driven by data and machine learning model.Several constraints were placed on the selection of these instances from a larger database.
+        In particular, all patients here are females at least 21 years old of Pima Indian heritage.
+    </p>
+    <a href="/diabetic/" class="btn btn-outline-primary">Diabetes Checkup App</a>
+    <br><br>
+    <ul class="list-group">
+        <li class="list-group-item">Pregnancies: Number of times pregnant</li>
+        <li class="list-group-item">Glucose: Plasma glucose concentration a 2 hours in an oral glucose tolerance test</li>
+        <li class="list-group-item">BloodPressure: Diastolic blood pressure (mm Hg)</li>
+        <li class="list-group-item">SkinThickness: Triceps skin fold thickness (mm)</li>
+        <li class="list-group-item">Insulin: 2-Hour serum insulin (mu U/ml)</li>
+        <li class="list-group-item">BMI: Body mass index (weight in kg/(height in m)<sup>2</sup>)</li>
+        <li class="list-group-item">DiabetesPedigreeFunction: Diabetes pedigree function</li>
+        <li class="list-group-item">Age: Age (years)</li>
+        <li class="list-group-item">Outcome: Class variable (0 or 1)</li>
+    </ul>
+    <br>
+</div>                                                 
+
+{% endblock  %}
